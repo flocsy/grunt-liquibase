@@ -24,13 +24,16 @@ module.exports = function(grunt) {
     // merge defaults with the passed in options
     var options = this.options({
       changeLogFile : 'changelog.xml',
-      classpath : path.join(__dirname, '..', 'lib', 'postgresql-9.4-1206-jdbc41.jar'),
+      classpath : [
+        path.join(__dirname, '..', 'lib', 'postgresql-9.4-1206-jdbc41.jar'),
+//        path.join(__dirname, '..', 'lib', 'mysql-connector-java-5.1.40-bin.jar')
+      ].join(':'),
       driver : 'org.postgresql.Driver',
       defaultSchemaName : null,
       logLevel: 'info',
       defaultsFile: null,
       execOptions : {
-	     maxBuffer : Infinity
+        maxBuffer : Infinity
       }
     });
     var cmd = this.data.command;

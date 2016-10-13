@@ -87,13 +87,16 @@ Path to the changelog file for liquibase.
 
 #### options.classpath
 Type: `String`
-Default value: `postgresql-9.3-1100.jdbc41.jar`
+Default value: `node_modules/grunt-liquibase/lib/postgresql-9.3-1100.jdbc41.jar`
+Optional values: `node_modules/grunt-liquibase/lib/postgresql-9.3-1100.jdbc41.jar
+  | node_modules/grunt-liquibase/lib/mysql-connector-java-5.1.40-bin.jar`
 
 Path to the jar file containing the jdbc driver. The module contains this jar file so you don't need it if you are talking to a postgresql database. Passed into the `--classpath` argument to liquibase.
 
 #### options.driver
 Type: `String`
 Default value: `org.postgresql.Driver`
+Optional values: `org.postgresql.Driver | com.mysql.jdbc.Driver`
 
 JDBC driver class. Passed into the `--driver` argument to liquibase.
 
@@ -217,7 +220,7 @@ grunt.initConfig({
 ```
 
 #### Custom Options
-In this example, the location of the changelog file is modified.
+In this example, the DB is mysql and the location of the changelog file is modified.
 
 ```js
 grunt.initConfig({
@@ -225,7 +228,9 @@ grunt.initConfig({
     options: {
       username : 'dbuser',
       password : 'passwd',
-      url : 'jdbc:postgresql://localhost:5432/test_db',
+      url : 'jdbc:mysql://localhost:3306/my_db',
+      driver: 'com.mysql.jdbc.Driver',
+      classpath: path.join(__dirname, 'node_modules', 'grunt-liquibase', 'lib', 'mysql-connector-java-5.1.40-bin.jar'),
       changelog : 'src/database/dbchangelog.xml'
     },
     command: 'update'
